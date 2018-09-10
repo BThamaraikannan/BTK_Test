@@ -10,3 +10,4 @@ Testing CI with jenkins with alibaba cloud - 2
 Testing CI with jenkins with alibaba cloud - 3
 Testing CI with jenkins with alibaba cloud - CICD Test
 Testing CI with jenkins with alibaba cloud - CICD Test delivery pipeline
+Testing CI with jenkins with alibaba cloud - CICD Test delivery pipeline with docker
