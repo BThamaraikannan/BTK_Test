@@ -14,8 +14,9 @@ pipeline {
       steps {
         script {
           echo 'Stage 2'
+          /* this code snippet is used to call the bat/exe file inside groovy script
           bat """
-          call ..\\hello.bat"""
+          call ..\\hello.bat"""   */
         }
       }
     }
