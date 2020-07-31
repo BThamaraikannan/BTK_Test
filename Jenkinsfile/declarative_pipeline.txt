@@ -1,12 +1,17 @@
 pipeline {
-  agent any
+	agent any
+	stages {
 
-    stage('checkout source') {
-      checkout scm
-    }
-
-    stage('run') {
-      call hello.bat
+		stage('checkout source') {
+			steps {
+				checkout scm
+				}
+		}
+    
+		stage('run') {
+			steps {
+				call hello.bat
+			}	
+		}		
     }
 }
-  
