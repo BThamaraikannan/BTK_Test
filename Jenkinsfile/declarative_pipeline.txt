@@ -1,6 +1,5 @@
 pipeline {
   agent any
-  stages {
 
     stage('checkout source') {
       checkout scm
@@ -9,6 +8,5 @@ pipeline {
     stage('run') {
       call hello.bat
     }
-
-  }
 }
+  
