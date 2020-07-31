@@ -1,8 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
 pipeline {
   agent any
   stages {
@@ -73,4 +68,3 @@ pipeline {
   }
 
 }
-
