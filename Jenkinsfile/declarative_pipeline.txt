@@ -15,7 +15,7 @@ pipeline {
         script {
           echo 'Stage 2'
           bat """
-          call ..\\hello.bat
+          call ..\\hello.bat"""
         }
       }
     }
