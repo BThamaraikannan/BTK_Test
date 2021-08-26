@@ -1,15 +1,12 @@
 pipeline {
     agent none
     parameters {
-        string(defaultValue: 'http://xyz.com', 
-            description: 'Remote SVN Repo URL', 
+        string(description: 'Remote SVN Repo URL', 
             name: 'SVN_Repo', 
             trim: false)
-		string(defaultValue: '/usr/localpath', 
-            description: 'Local svn repo name', 
+	string(description: 'Local svn repo name', 
             name: 'Local_SVN_Repo')
-        string(defaultValue: '/usr/localpathname', 
-            description: 'Local git repo name', 
+        string(description: 'Local git repo name', 
             name: 'Local_GIT_Repo')
 	}
     stages {
