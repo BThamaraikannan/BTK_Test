@@ -10,12 +10,5 @@ pipeline {
                 }
             }
         } 
-        stage('migrate to git') {
-            steps {
-                script{
-                    `git svn clone "${SVN_Repo}" --authors-file=authors.txt --no-metadata --prefix "" -s "${Local_GIT_Repo}"`
-                }
-            }
-        }
     }
 }
