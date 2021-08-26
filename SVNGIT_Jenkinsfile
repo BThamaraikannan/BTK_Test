@@ -16,8 +16,8 @@ pipeline {
             }*/
             steps {
                 script{
-                    svn co $SVN_Repo $local_SVN_Repo
-                    cd $local_SVN_Repo
+                    svn co "${SVN_Repo}" "${Local_SVN_Repo}"
+                    cd "${Local_SVN_Repo}"
                     svn log -q | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > authors.txt
                 }
             }
@@ -28,7 +28,7 @@ pipeline {
             }*/
             steps {
                 script{
-                    git svn clone $SVN_Repo --authors-file=authors.txt --no-metadata --prefix "" -s $Local_GIT_Repo
+                    git svn clone "${SVN_Repo}" --authors-file=authors.txt --no-metadata --prefix "" -s "${Local_GIT_Repo}"
                 }
             }
 
