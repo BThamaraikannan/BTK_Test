@@ -4,9 +4,12 @@ pipeline {
         stage('checkout SVN repo') {
             steps {
                 script{
-                    svn checkout "${SVN_Repo}" "${Local_SVN_Repo}"
-                    cd "${Local_SVN_Repo}"
-                    svn log -q | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > authors.txt
+                    sh '''
+                        #!/bin/bash
+                        svn checkout "${SVN_Repo}" "${Local_SVN_Repo}"
+                        cd "${Local_SVN_Repo}"
+                        svn log -q | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > authors.txt
+                    '''
                 }
             }
         } 
