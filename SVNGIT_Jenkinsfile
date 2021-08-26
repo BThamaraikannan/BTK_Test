@@ -1,6 +1,6 @@
 pipeline {
     agent none
-    parameters {
+    /*parameters {
         string(description: 'Remote SVN Repo URL', 
             name: 'SVN_Repo', 
             trim: false)
@@ -8,7 +8,7 @@ pipeline {
             name: 'Local_SVN_Repo')
         string(description: 'Local git repo name', 
             name: 'Local_GIT_Repo')
-	}
+	}*/
     stages {
         stage('checkout SVN repo') {
             /*agent{
