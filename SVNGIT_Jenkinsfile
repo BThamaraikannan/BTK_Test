@@ -1,0 +1,56 @@
+pipeline {
+    agent none
+    parameters {
+        string(defaultValue: 'http://xyz.com', 
+            description: 'Remote SVN Repo URL', 
+            name: 'SVN_Repo', 
+            trim: false)
+		string(defaultValue: '/usr/localpath', 
+            description: 'Local svn repo name', 
+            name: 'Local_SVN_Repo')
+        string(defaultValue: '/usr/localpathname', 
+            description: 'Local git repo name', 
+            name: 'Local_GIT_Repo')
+	}
+    stages {
+        stage('checkout SVN repo') {
+            /*agent{
+                label OIT-ENTAPPS-DEVOPS-TEST
+            }*/
+            steps {
+                script{
+                    svn co $SVN_Repo $local_SVN_Repo
+                    cd $local_SVN_Repo
+                    svn log -q | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > authors.txt
+                }
+            }
+        } 
+        stage('migrate to git') {
+            /*agent{
+                label OIT-ENTAPPS-DEVOPS-TEST
+            }*/
+            steps {
+                script{
+                    git svn clone $SVN_Repo --authors-file=authors.txt --no-metadata --prefix "" -s $Local_GIT_Repo
+                }
+            }
+
+        }
+        stage('Moving the tags and branches to GIT') {
+            /*agent{
+                label OIT-ENTAPPS-DEVOPS-TEST
+            }*/
+            steps {
+                script{
+                    for t in $(git for-each-ref --format='%(refname:short)' refs/remotes/tags); do git tag ${t/tags\//} $t && git branch -D -r $t; done
+                    echo "all the tags has been moved from SVN to GIT"
+                    for b in $(git for-each-ref --format='%(refname:short)' refs/remotes); do git branch $b refs/remotes/$b && git branch -D -r $b; done
+                    echo "refs moved to GIT Successfully...."
+                    git branch -d trunk
+                    echo "removed the trunk from New GIT"
+
+                }
+            }
+        }
+    }
+}
