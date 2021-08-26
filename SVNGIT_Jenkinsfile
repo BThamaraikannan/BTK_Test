@@ -33,7 +33,7 @@ pipeline {
             }
 
         }
-        stage('Moving the tags and branches to GIT') {
+        /*stage('Moving the tags and branches to GIT') {
             /*agent{
                 label OIT-ENTAPPS-DEVOPS-TEST
             }*/
@@ -48,6 +48,6 @@ pipeline {
 
                 }
             }
-        }
+        }*/
     }
 }
